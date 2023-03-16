@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constant/constant.dart';
 
@@ -54,8 +55,8 @@ class Constants {
 
 void choiceAction(String choice) {
   if (choice == Constants.english) {
-    print('english');
+    Get.updateLocale(locale[0]['locale']);
   } else if (choice == Constants.arabic) {
-    print('Arabic');
+    Get.updateLocale(locale[1]['locale']);
   }
 }

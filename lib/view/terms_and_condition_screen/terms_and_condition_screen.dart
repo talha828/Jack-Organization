@@ -37,7 +37,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                     },
                   ),
                 ),
-                const Text("I agree to the term and condition"),
+                Text("agree".tr),
               ],
             ),
             Padding(
@@ -53,7 +53,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                           vertical: width * 0.05, horizontal: width * 0.05),
                     );
                   },
-                  child: const Text("Continue")),
+                  child: Text("Continue".tr)),
             )
           ],
         ),
@@ -68,7 +68,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Term And Conditions",
+                    "term_and_condition_title".tr,
                     style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: width * 0.06),
                   ),

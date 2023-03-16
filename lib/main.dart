@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jack_delivery/translation/translation.dart';
 import 'package:jack_delivery/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        translations: LocalString(),
+        locale:const Locale('en','US'),
         theme: ThemeData(
             primarySwatch: createMaterialColor(const Color(0xffF9B334)),
             primaryTextTheme:

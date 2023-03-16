@@ -29,9 +29,9 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
           backgroundColor: Colors.white,
           elevation: 0.0,
           centerTitle: true,
-          title: const Text(
-            "Register As",
-            style: TextStyle(fontWeight: FontWeight.bold, color: appBlueColor),
+          title: Text(
+            "register_as".tr,
+            style:const TextStyle(fontWeight: FontWeight.bold, color: appBlueColor),
           ),
           leading: IconButton(
             onPressed: ()=>Navigator.pop(context),
@@ -53,24 +53,24 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                RegistrationButton(onTap: (){Get.to(const OrganizationScreen());}, width: width, image: Assets.imageVector, title: "Organization"),
-                RegistrationButton(scale:10,onTap: onTap, width: width, image: Assets.imageBicycle, title: "Rider")
+                RegistrationButton(onTap: (){Get.to(const OrganizationScreen());}, width: width, image: Assets.imageVector, title: "Organization".tr),
+                RegistrationButton(scale:10,onTap: onTap, width: width, image: Assets.imageBicycle, title: "Rider".tr)
               ],),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text("Already a user?",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text("already_user".tr,textAlign: TextAlign.center,style:const TextStyle(fontWeight: FontWeight.bold),),
                   SizedBox(height: width * 0.04,),
-                  const Text("Login To your Account",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text("login_to_your_account".tr,textAlign: TextAlign.center,style:const TextStyle(fontWeight: FontWeight.bold),),
                   SizedBox(height: width * 0.04,),
-                  Container(padding: EdgeInsets.symmetric(horizontal: width * 0.235), child: const Divider(color: appYellowColor,thickness: 2,)),
+                  Container(padding: EdgeInsets.symmetric(horizontal: width * 0.235), child: const Divider(color: appYellowColor,thickness: 2,),),
                   SizedBox(height: width * 0.04,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(Assets.imageRight,scale: 25,),
                       SizedBox(width: width * 0.04,),
-                      const Text("Organization",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text("Organization".tr,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   SizedBox(height:width * 0.04 ,),
@@ -79,7 +79,7 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
                     children: [
                       Image.asset(Assets.imageRight,scale: 25,),
                       SizedBox(width: width * 0.04,),
-                      const Text("Rider            ",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text("Rider".tr +"            ",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ],
