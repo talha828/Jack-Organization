@@ -2,6 +2,11 @@
 class Assets {
   Assets._();
 
+  static const String iconAsterisk = 'assets/icon/asterisk.png';
+  static const String iconCr = 'assets/icon/cr.png';
+  static const String iconEmail = 'assets/icon/email.png';
+  static const String iconPhone = 'assets/icon/phone.png';
+  static const String iconProfile = 'assets/icon/profile.png';
   static const String imageBicycle = 'assets/image/bicycle.png';
   static const String imageBurger = 'assets/image/burger.png';
   static const String imageGeneralStore = 'assets/image/general_store.png';
@@ -11,7 +16,9 @@ class Assets {
   static const String imageLogoNameArbic = 'assets/image/logo_name_arbic.png';
   static const String imageLogoNameEnglish = 'assets/image/logo_name_english.png';
   static const String imageMedicalStore = 'assets/image/medical_store.png';
+  static const String imageOther = 'assets/image/other.png';
   static const String imageRight = 'assets/image/right.png';
+  static const String imageSignup = 'assets/image/signup.png';
   static const String imageVector = 'assets/image/Vector.png';
 
 }

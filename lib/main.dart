@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jack_delivery/translation/translation.dart';
+import 'package:jack_delivery/view/organization_category_screen/organization_category_screen.dart';
+import 'package:jack_delivery/view/sign_up_screen/sign_up_screen.dart';
 import 'package:jack_delivery/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -15,13 +17,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         translations: LocalString(),
-        locale:const Locale('en','US'),
+        locale: const Locale('en', 'US'),
         theme: ThemeData(
             primarySwatch: createMaterialColor(const Color(0xffF9B334)),
             primaryTextTheme:
                 GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme),
-            textTheme: GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme)),
-        home: const SplashScreen());
+            textTheme:
+                GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme)),
+        home: const SignUpScreen());
   }
 
   MaterialColor createMaterialColor(Color color) {

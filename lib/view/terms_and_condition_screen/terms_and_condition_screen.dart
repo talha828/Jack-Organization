@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jack_delivery/component/widgets/language_dropdown.dart';
 import 'package:jack_delivery/view/register_as_screen/register_as_screen.dart';
 
-import '../../components/constant/constant.dart';
-import '../../components/widgets/language_dropdown.dart';
 
 class TermsAndConditionScreen extends StatefulWidget {
   const TermsAndConditionScreen({Key? key}) : super(key: key);
@@ -72,7 +71,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: width * 0.06),
                   ),
-                  LanguageDropDown(width: width)
+                  LanguageDropDown(width: width),
                 ],
               ),
               SizedBox(

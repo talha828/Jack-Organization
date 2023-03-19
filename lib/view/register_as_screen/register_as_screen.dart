@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jack_delivery/component/constant/constant.dart';
+import 'package:jack_delivery/component/widgets/language_dropdown.dart';
 import 'package:jack_delivery/generated/assets.dart';
-import 'package:jack_delivery/view/organization_screen/organization_screen.dart';
-
-import '../../components/constant/constant.dart';
-import '../../components/widgets/language_dropdown.dart';
-import '../../components/widgets/registrationButton.dart';
+import 'package:jack_delivery/view/organization_category_screen/organization_category_screen.dart';
+import '../../component/widgets/registrationButton.dart';
 import '../terms_and_condition_screen/terms_and_condition_screen.dart';
 
 class RegisterAsScreen extends StatefulWidget {
@@ -53,7 +52,7 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                RegistrationButton(onTap: (){Get.to(const OrganizationScreen());}, width: width, image: Assets.imageVector, title: "Organization".tr),
+                RegistrationButton(onTap: (){Get.to(const OrganizationCategoryScreen());}, width: width, image: Assets.imageVector, title: "Organization".tr),
                 RegistrationButton(scale:10,onTap: onTap, width: width, image: Assets.imageBicycle, title: "Rider".tr)
               ],),
               Column(
