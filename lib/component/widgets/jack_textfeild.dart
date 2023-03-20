@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final Color iconColor;
   final double width;
   final TextEditingController? controller;
+  bool? obscureText=false;
+  Function()? onTap=(){};
 
   CustomTextField({
     required this.prefixImage,
@@ -15,6 +17,8 @@ class CustomTextField extends StatelessWidget {
     required this.iconColor,
     required this.width,
     this.controller,
+    this.obscureText,
+    this.onTap,
   });
 
   @override
@@ -51,6 +55,7 @@ class CustomTextField extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
+              obscureText:obscureText ?? false,
               controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
@@ -58,13 +63,16 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal:width * 0.04),
-            child: Image.asset(
-              suffixImage,
-              height: width * 0.03,
-              width: width * 0.03,
-              color: iconColor,
+          InkWell(
+            onTap:onTap,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal:width * 0.04),
+              child: Image.asset(
+                suffixImage,
+                height: width * 0.04,
+                width: width * 0.04,
+                color: iconColor,
+              ),
             ),
           ),
         ],

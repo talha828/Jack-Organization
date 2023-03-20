@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/otp_verification_screen/otp_verification.dart';
 
 import '../../component/constant/constant.dart';
 import '../../component/widgets/jack_textfeild.dart';
@@ -102,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
               ElevatedButton(
-                  onPressed: () {}, child: Text("create_account".tr)),
+                  onPressed: ()=>Get.to(const OtpVerificationScreen()), child: Text("create_account".tr)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -111,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: width * 0.02,
                   ),
                   InkWell(
-                      onTap: () {},
+                      onTap: (){},
                       child: Text(
                         "login".tr,
                         style: const TextStyle(fontWeight: FontWeight.bold),
