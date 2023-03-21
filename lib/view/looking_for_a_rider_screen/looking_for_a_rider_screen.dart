@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
+import 'package:jack_delivery/view/order_details_screen/order_details_screen.dart';
 
 import '../../generated/assets.dart';
 
@@ -118,7 +119,7 @@ class _LookingForRiderScreenState extends State<LookingForRiderScreen> {
                     ],
                   ),
                 ),
-                ElevatedButton(onPressed: (){}, child: Text("confirm".tr))
+                ElevatedButton(onPressed: ()=>Get.to(const OrderDetailsScreen()), child: Text("confirm".tr))
               ],
             ),
           ),

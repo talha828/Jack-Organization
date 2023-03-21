@@ -5,6 +5,9 @@ import 'package:jack_delivery/model/organization_card_model.dart';
 
 import '../../component/constant/constant.dart';
 import '../../generated/assets.dart';
+import '../about_us_screen/about_us_screen.dart';
+import '../notification_screen/notification_screen.dart';
+import '../wallet_screen/wallet_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -34,6 +37,22 @@ class _DrawerScreenState extends State<DrawerScreen> {
          ),
           body: ListView.separated(itemBuilder: (context,index){
             return ListTile(
+              onTap: (){
+                switch(index){
+                  case 0:
+                    Get.to(const WalletScreen());
+                    break;
+                  case 1:
+                    Get.to(const NotificationScreen());
+                    break;
+                  case 2:
+                    Get.to(const AboutUsScreen());
+                    break;
+                  case 3:
+                    Get.to(const WalletScreen());
+                    break;
+                }
+              },
               minVerticalPadding: 2,
               // contentPadding: EdgeInsets.symmetric(horizontal: width * 0.04),
               title: Text(list[index].title,style:const TextStyle(fontWeight: FontWeight.bold),),

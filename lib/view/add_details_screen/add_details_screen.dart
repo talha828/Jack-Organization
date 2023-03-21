@@ -16,10 +16,12 @@ class AddDetailsScreen extends StatefulWidget {
 }
 
 class _AddDetailsScreenState extends State<AddDetailsScreen> {
-  TextEditingController _controller=TextEditingController();
+
+  TextEditingController _controller = TextEditingController();
   int maxline=1;
   int _groupValue = -1;
   String hintText="Enter text here";
+
   @override
   Widget build(BuildContext context) {
     var width=MediaQuery.of(context).size.width;
