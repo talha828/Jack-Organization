@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
 import 'package:jack_delivery/view/home_screen/home_screen.dart';
+
+import '../add_details_screen/add_details_screen.dart';
+import '../order_status_screen/order_status_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -14,8 +18,8 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text('Search Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Profile Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    AddDetailsScreen(),
+    OrderStatusScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,17 +40,17 @@ class _MainScreenState extends State<MainScreen> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Image.asset(Assets.iconHome),
-                label: 'Home',
+                label: 'home'.tr,
                 backgroundColor: Colors.white
             ),
             BottomNavigationBarItem(
                 icon: Image.asset(Assets.iconNewOrder),
-                label: 'New Order',
+                label: 'new_order'.tr,
                 backgroundColor: Colors.white
             ),
             BottomNavigationBarItem(
               icon:Image.asset(Assets.iconStatus),
-              label: 'Status',
+              label: 'status'.tr,
                 backgroundColor: Colors.white
             ),
           ],

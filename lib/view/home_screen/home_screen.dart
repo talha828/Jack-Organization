@@ -1,9 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/drawer_screen/drawer_screen.dart';
+import 'package:jack_delivery/view/order_tracking_screen/order_tracking_screen.dart';
+
+import '../../component/widgets/language_dropdown.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,11 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
       zoom: 19.151926040649414);
 
   // Initial Selected Value
-  String dropdownvalue = 'Choose rider';
+  String dropdownvalue = 'chose_rider'.tr;
 
   // List of items in our dropdown menu
   var items = [
-    'Choose rider',
+    'chose_rider'.tr,
     'Item 2',
     'Item 3',
     'Item 4',
@@ -53,10 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Image.asset(
-          Assets.iconMenu,
-          scale: 16,
+        leading: InkWell(
+          onTap: () => Get.to(const DrawerScreen()),
+          child: Image.asset(
+            Assets.iconMenu,
+            scale: 16,
+            color: appRedColor,
+          ),
         ),
+        // actions: [
+        //   LanguageDropDown(width: width),
+        // ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(
@@ -85,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        "Total Delivery Today",
+                        "total_delivery_today".tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: width * 0.06),
@@ -115,39 +127,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: width * 0.04,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: width * 0.04, horizontal: width * 0.04),
-                  width: width * 0.4,
-                  height: width * 0.45,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(-2, 2),
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 7,
-                          spreadRadius: 5,
+                InkWell(
+                  onTap: ()=>Get.to(const OrderTrackingScreen()),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: width * 0.04, horizontal: width * 0.04),
+                    width: width * 0.4,
+                    height: width * 0.45,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(-2, 2),
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 7,
+                            spreadRadius: 5,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "track_order".tr,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: width * 0.055),
                         ),
+                        SizedBox(
+                          height: width * 0.04,
+                        ),
+                        Image.asset(
+                          Assets.imageTrack,
+                          scale: 1.3,
+                        )
                       ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "Track Order",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: width * 0.055),
-                      ),
-                      SizedBox(
-                        height: width * 0.04,
-                      ),
-                      Image.asset(
-                        Assets.imageTrack,
-                        scale: 1.3,
-                      )
-                    ],
+                    ),
                   ),
                 )
               ],
@@ -158,8 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 Text(
-                  "Rider Live Location",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  "rider_live_location".tr,
+                  style:const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   width: width * 0.02,
@@ -193,15 +208,12 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               children: [
                 SizedBox(
-                  height: width * 0.9,
+                  height: width * 0.87,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: GoogleMap(
                       mapType: MapType.normal,
                       initialCameraPosition: _kGooglePlex,
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
                     ),
                   ),
                 ),
@@ -218,10 +230,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         padding: EdgeInsets.symmetric(
                             vertical: width * 0.04, horizontal: width * 0.04),
-                        child: const Text(
-                          "Estimated delivery in 25 mins",
+                        child: Text(
+                          "estimate_delivery".tr,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style:const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -230,18 +242,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.symmetric(
                             vertical: width * 0.04, horizontal: width * 0.04),
                         child: ListTile(
-                          contentPadding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: width * 0.02),
                           leading: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            child:ClipRRect(
+                            child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
-                                child: Image.asset(Assets.imageSignup,width: width * 0.15,height: width * 0.15,)) ,
+                                child: Image.asset(
+                                  Assets.imageSignup,
+                                  width: width * 0.15,
+                                  height: width * 0.15,
+                                )),
                           ),
-                          title: Text("Ahmed Zubair",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                          subtitle: Text("34922 BAHRAIN",style: TextStyle(color: Colors.white,),),
+                          title: Text(
+                            "Ahmed Zubair",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            "34922 BAHRAIN",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                           trailing: Container(
                             width: width * 0.24,
                             child: Row(
@@ -249,13 +276,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 CircleAvatar(
                                   radius: width * 0.05,
                                   backgroundColor: Colors.white,
-                                  child: Image.asset(Assets.iconPhoneCall,scale: 25,color: appRedColor,),
+                                  child: Image.asset(
+                                    Assets.iconPhoneCall,
+                                    scale: 25,
+                                    color: appRedColor,
+                                  ),
                                 ),
-                                SizedBox(width: width * 0.04,),
+                                SizedBox(
+                                  width: width * 0.04,
+                                ),
                                 CircleAvatar(
                                   radius: width * 0.05,
                                   backgroundColor: Colors.white,
-                                  child: Image.asset(Assets.iconChat,scale: 25,color: appRedColor,),
+                                  child: Image.asset(
+                                    Assets.iconChat,
+                                    scale: 25,
+                                    color: appRedColor,
+                                  ),
                                 )
                               ],
                             ),

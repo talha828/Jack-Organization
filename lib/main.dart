@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jack_delivery/translation/translation.dart';
 import 'package:jack_delivery/view/home_screen/home_screen.dart';
 import 'package:jack_delivery/view/login_screen/login_screen.dart';
+import 'package:jack_delivery/view/looking_for_a_rider_screen/looking_for_a_rider_screen.dart';
 import 'package:jack_delivery/view/main_screen/main_screen.dart';
+import 'package:jack_delivery/view/order_tracking_screen/order_tracking_screen.dart';
 import 'package:jack_delivery/view/organization_category_screen/organization_category_screen.dart';
 import 'package:jack_delivery/view/otp_verification_screen/otp_verification.dart';
 import 'package:jack_delivery/view/sign_up_screen/sign_up_screen.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
     for (int i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
     }
-    strengths.forEach((strength) {
+    strengths.forEach((strength){
       final double ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
         r + ((ds < 0 ? r : (255 - r)) * ds).round(),
