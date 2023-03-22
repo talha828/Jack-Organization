@@ -78,6 +78,7 @@ class LocalString extends Translations {
           "withdraw":"Withdraw",
           "notification":"Notification",
           "aboutus":"About Us",
+          "name":"Name",
         },
         'ar_SU': {
           "term_and_condition_title": "شروط وأحكام",
@@ -153,7 +154,8 @@ class LocalString extends Translations {
           "recharge_wallet": "إعادة شحن المحفظة",
           "withdraw": "سحب",
           "notification":"إشعار",
-          "aboutus":"من نحن"
+          "aboutus":"من نحن",
+          "name":"اسم",
         },
       };
 }
