@@ -1,3 +1,4 @@
+import 'package:custom_widget/custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/generated/assets.dart';
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: width,
               ),
               CustomTextField(
-                onTap: (){
+                onTapSuffix: (){
                   setState(() {
                     _passwordVisible = !_passwordVisible;
                   });
