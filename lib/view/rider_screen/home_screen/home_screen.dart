@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/rider_screen/drawer_screen/drawer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
         leading: InkWell(
           //TODO :// ADD DRAWER for rider
-          //onTap: () => Get.to(const DrawerScreen()),
+          onTap: () => Get.to(const DrawerScreen()),
           child: Image.asset(
             Assets.iconMenu,
             scale: 16,
