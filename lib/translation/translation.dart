@@ -81,6 +81,7 @@ class LocalString extends Translations {
           "name":"Name",
           "your_wallet":"Your Wallet",
           "google_map":"Google Map",
+          "chose_your_category":"Choose Your Category",
         },
         'ar_SU': {
           "term_and_condition_title": "شروط وأحكام",
@@ -159,7 +160,8 @@ class LocalString extends Translations {
           "aboutus":"من نحن",
           "name":"اسم",
           "your_wallet": "محفظتك",
-          "google_map": "خريطة جوجل"
+          "google_map": "خريطة جوجل",
+          "chose_your_category":"اختر فئتك"
         },
       };
 }

@@ -12,10 +12,12 @@ class OrganizationCategoryScreen extends StatefulWidget {
   const OrganizationCategoryScreen({Key? key}) : super(key: key);
 
   @override
-  State<OrganizationCategoryScreen> createState() => _OrganizationCategoryScreenState();
+  State<OrganizationCategoryScreen> createState() =>
+      _OrganizationCategoryScreenState();
 }
 
-class _OrganizationCategoryScreenState extends State<OrganizationCategoryScreen> {
+class _OrganizationCategoryScreenState
+    extends State<OrganizationCategoryScreen> {
   var onTap = () {};
   String title = "Fast Food";
   String image = Assets.imageBurger;
@@ -30,8 +32,8 @@ class _OrganizationCategoryScreenState extends State<OrganizationCategoryScreen>
           backgroundColor: Colors.white,
           elevation: 0.0,
           centerTitle: true,
-          title: const Text(
-            "Organization",
+          title: Text(
+            "Organization".tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -53,45 +55,123 @@ class _OrganizationCategoryScreenState extends State<OrganizationCategoryScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                "Choose Your Category",
+              Text(
+                "chose_your_category".tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: width * 0.06,
               ),
               Expanded(
                 child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: width * 0.05,
-                  mainAxisSpacing: width * 0.05,
-                  children: list
-                      .map(
-                        (e) => CategoryCard(
-                            onTap: () {
-                              setState(
-                                () {
-                                  for (var i in list) {
-                                    if (i.title == e.title) {
-                                      e.isSelected =
-                                          e.isSelected ? false : true;
-                                    } else {
-                                      i.isSelected = false;
-                                    }
-                                  }
-                                },
-                              );
-                            },
-                            isSelected: e.isSelected,
-                            image: e.image,
-                            title: e.title),
-                      ).toList(),
-                ),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: width * 0.05,
+                    mainAxisSpacing: width * 0.05,
+                    children: [
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[0].title) {
+                                  list[0].isSelected =
+                                      list[0].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[0].isSelected,
+                          image: list[0].image,
+                          title: "fast_food".tr),
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[1].title) {
+                                  list[1].isSelected =
+                                  list[1].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[1].isSelected,
+                          image: list[1].image,
+                          title: "groceries".tr),
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[2].title) {
+                                  list[2].isSelected =
+                                  list[2].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[2].isSelected,
+                          image: list[2].image,
+                          title: "gifts".tr),
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[3].title) {
+                                  list[3].isSelected =
+                                  list[3].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[3].isSelected,
+                          image: list[3].image,
+                          title: "medical_store".tr),
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[4].title) {
+                                  list[4].isSelected =
+                                  list[4].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[4].isSelected,
+                          image: list[4].image,
+                          title:"general_store".tr),
+                      CategoryCard(
+                          onTap: () {
+                            setState(() {
+                              for (var i in list) {
+                                if (i.title == list[5].title) {
+                                  list[5].isSelected =
+                                  list[5].isSelected ? false : true;
+                                } else {
+                                  i.isSelected = false;
+                                }
+                              }
+                            });
+                          },
+                          isSelected: list[5].isSelected,
+                          image: list[5].image,
+                          title: "others".tr),
+                    ]),
               ),
-              ElevatedButton(onPressed: (){
-                Get.to(const SignUpScreen());
-              }, child: Text("Continue".tr))
+              ElevatedButton(
+                  onPressed: () {
+                    Get.to(const SignUpScreen());
+                  },
+                  child: Text("Continue".tr))
             ],
           ),
         ),
