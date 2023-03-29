@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
+
 import '../../../model/order_detais_model.dart';
 
 class OrderDetailsScreen extends StatefulWidget {

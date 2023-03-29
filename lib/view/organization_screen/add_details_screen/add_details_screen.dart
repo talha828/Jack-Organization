@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../component/constant/constant.dart';
 import '../../../component/widgets/add_details_text_fields_screen.dart';
 import '../../../generated/assets.dart';

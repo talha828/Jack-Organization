@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:jack_delivery/generated/assets.dart';
 
 import '../../../component/constant/constant.dart';
-import '../../../component/widgets/jack_textfeild.dart';
 import '../../../component/widgets/language_dropdown.dart';
 import '../otp_verification_screen/otp_verification.dart';
 

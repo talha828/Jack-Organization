@@ -4,6 +4,7 @@ import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/component/widgets/language_dropdown.dart';
 import 'package:jack_delivery/component/widgets/registrationButton.dart';
 import 'package:jack_delivery/generated/assets.dart';
+
 import '../../organization_screen/organization_category_screen/organization_category_screen.dart';
 import '../../rider_screen/sign_up_screen/sign_up_screen.dart';
 

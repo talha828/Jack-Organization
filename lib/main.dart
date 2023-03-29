@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jack_delivery/translation/translation.dart';
-import 'package:jack_delivery/view/common_screen/splash_screen/splash_screen.dart';
 
 import 'view/rider_screen/sign_up_screen/sign_up_screen.dart';
 

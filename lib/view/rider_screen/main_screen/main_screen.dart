@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/rider_screen/home_screen/home_screen.dart';
 
-import '../add_details_screen/add_details_screen.dart';
-import '../home_screen/home_screen.dart';
-import '../order_status_screen/order_status_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -19,8 +17,8 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    AddDetailsScreen(),
-    OrderStatusScreen(),
+    Text("2"),
+    Text("3"),
   ];
 
   void _onItemTapped(int index) {
@@ -45,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
                 backgroundColor: Colors.white
             ),
             BottomNavigationBarItem(
-                icon: Image.asset(Assets.iconNewOrder),
+                icon: Image.asset(Assets.imageBell,scale: 15,),
                 label: 'new_order'.tr,
                 backgroundColor: Colors.white
             ),

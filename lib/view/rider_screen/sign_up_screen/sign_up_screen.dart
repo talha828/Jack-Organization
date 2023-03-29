@@ -2,12 +2,11 @@ import 'package:custom_widget/custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/rider_screen/otp_verification_screen/otp_verification.dart';
 
 import '../../../component/constant/constant.dart';
 import '../../../component/widgets/add_details_text_fields_screen.dart';
-import '../../../component/widgets/jack_textfeild.dart';
 import '../../../component/widgets/language_dropdown.dart';
-import '../../organization_screen/otp_verification_screen/otp_verification.dart';
 
 
 class SignUpScreen extends StatefulWidget {

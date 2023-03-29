@@ -5,7 +5,8 @@ import 'package:jack_delivery/generated/assets.dart';
 
 import '../../../component/constant/constant.dart';
 import '../../../component/widgets/language_dropdown.dart';
-import '../main_screen/main_screen.dart';
+import '../../rider_screen/main_screen/main_screen.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset(Assets.imageSignup,width: width *0.5,height: width * 0.5,),
+              Image.asset(Assets.imageRiderSignUp,width: width *0.5,height: width * 0.5,),
               CustomTextField(
                 prefixImage: Assets.iconEmail,
                 suffixImage: Assets.iconAsterisk,

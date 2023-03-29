@@ -16,6 +16,7 @@ class Assets {
   static const String iconProfile = 'assets/icon/profile.png';
   static const String iconStatus = 'assets/icon/status.png';
   static const String iconView = 'assets/icon/view.png';
+  static const String imageBell = 'assets/image/bell.png';
   static const String imageBicycle = 'assets/image/bicycle.png';
   static const String imageBurger = 'assets/image/burger.png';
   static const String imageGeneralStore = 'assets/image/general_store.png';
@@ -26,6 +27,7 @@ class Assets {
   static const String imageLogoNameEnglish = 'assets/image/logo_name_english.png';
   static const String imageMedicalStore = 'assets/image/medical_store.png';
   static const String imageOther = 'assets/image/other.png';
+  static const String imageReceptionBell = 'assets/image/reception-bell.png';
   static const String imageRiderSignUp = 'assets/image/rider_sign_up.png';
   static const String imageRight = 'assets/image/right.png';
   static const String imageSignup = 'assets/image/signup.png';

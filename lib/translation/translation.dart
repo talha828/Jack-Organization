@@ -79,6 +79,8 @@ class LocalString extends Translations {
           "notification":"Notification",
           "aboutus":"About Us",
           "name":"Name",
+          "your_wallet":"Your Wallet",
+          "google_map":"Google Map",
         },
         'ar_SU': {
           "term_and_condition_title": "شروط وأحكام",
@@ -156,6 +158,8 @@ class LocalString extends Translations {
           "notification":"إشعار",
           "aboutus":"من نحن",
           "name":"اسم",
+          "your_wallet": "محفظتك",
+          "google_map": "خريطة جوجل"
         },
       };
 }
