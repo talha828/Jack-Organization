@@ -43,6 +43,7 @@ dependencies:
   google_maps_flutter: ^2.2.5
   custom_widget:
     path: packages/custom_widget
+  enhance_stepper: ^0.1.1
 
 
 dev_dependencies:

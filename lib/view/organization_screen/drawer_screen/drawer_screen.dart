@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/model/drawer_model.dart';
+import 'package:jack_delivery/view/common_screen/splash_screen/splash_screen.dart';
 
 import '../../../component/constant/constant.dart';
 import '../../../generated/assets.dart';
@@ -50,7 +51,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     Get.to(const AboutUsScreen());
                     break;
                   case 3:
-                    Get.to(const WalletScreen());
+                    Get.to(const SplashScreen());
                     break;
                 }
               },

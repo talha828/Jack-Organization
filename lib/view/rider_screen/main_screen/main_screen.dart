@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
 import 'package:jack_delivery/view/rider_screen/home_screen/home_screen.dart';
+import 'package:jack_delivery/view/rider_screen/order_status_screen/order_status_screen.dart';
+
+import '../new_order_screen/new_order_screen.dart';
 
 
 
@@ -17,8 +20,8 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text("2"),
-    Text("3"),
+    NewOrderScreen(),
+    OrderStatusScreen(),
   ];
 
   void _onItemTapped(int index) {

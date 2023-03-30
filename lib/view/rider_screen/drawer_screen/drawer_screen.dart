@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jack_delivery/model/drawer_model.dart';
+import 'package:jack_delivery/view/rider_screen/about_us_screen/about_us_screen.dart';
+import 'package:jack_delivery/view/rider_screen/notification_screen/notification_screen.dart';
+import 'package:jack_delivery/view/rider_screen/wallet_screen/wallet_screen.dart';
 import '../../../component/constant/constant.dart';
 import '../../../generated/assets.dart';
+import '../../common_screen/splash_screen/splash_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -83,18 +87,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   return ListTile(
                     onTap: () {
                       switch (index) {
-                        // case 0:
-                        //   Get.to(const WalletScreen());
-                        //   break;
-                        // case 1:
-                        //   Get.to(const NotificationScreen());
-                        //   break;
-                        // case 2:
-                        //   Get.to(const AboutUsScreen());
-                        //   break;
-                        // case 3:
-                        //   Get.to(const WalletScreen());
-                        //   break;
+                        case 0:
+                          Get.to(const WalletScreen());
+                          break;
+                        case 1:
+                          Get.to(const NotificationScreen());
+                          break;
+                        case 2:
+                          Get.to(const AboutUsScreen());
+                          break;
+                        case 3:
+                          Get.to(const SplashScreen());
+                          break;
                       }
                     },
                     minVerticalPadding: 2,
