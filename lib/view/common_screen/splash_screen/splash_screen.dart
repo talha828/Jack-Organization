@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), ()=>Get.to(const TermsAndConditionScreen()));
+    Timer(const Duration(seconds: 3), ()=>Get.toNamed("/termAndConditions/"));
     super.initState();
   }
   @override

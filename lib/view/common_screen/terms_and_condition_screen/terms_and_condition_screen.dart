@@ -44,7 +44,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
               padding: EdgeInsets.symmetric(horizontal: width * 0.04),
               child: ElevatedButton(
                   onPressed: () async {
-                    check?Get.to(const RegisterAsScreen()):Get.snackbar(
+                    check?Get.toNamed("/register_as/"):Get.snackbar(
                       "Accept the Term And Conditions",
                       "For Proceed you must need to accept term and conditions",
                       duration: const Duration(seconds: 5),

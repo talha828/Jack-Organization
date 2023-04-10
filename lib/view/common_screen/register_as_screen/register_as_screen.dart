@@ -4,6 +4,8 @@ import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/component/widgets/language_dropdown.dart';
 import 'package:jack_delivery/component/widgets/registrationButton.dart';
 import 'package:jack_delivery/generated/assets.dart';
+import 'package:jack_delivery/view/rider_screen/login_screen/login_screen.dart' as login;
+import '../../organization_screen/login_screen/login_screen.dart';
 
 import '../../organization_screen/organization_category_screen/organization_category_screen.dart';
 import '../../rider_screen/sign_up_screen/sign_up_screen.dart';
@@ -16,9 +18,6 @@ class RegisterAsScreen extends StatefulWidget {
 }
 
 class _RegisterAsScreenState extends State<RegisterAsScreen> {
-  String title="Organization";
-  String image="Organization";
-  var onTap=(){};
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -53,7 +52,7 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                RegistrationButton(onTap: (){Get.to(const OrganizationCategoryScreen());}, width: width, image: Assets.imageVector, title: "Organization".tr),
+                RegistrationButton(onTap: (){Get.toNamed("/org_category/");}, width: width, image: Assets.imageVector, title: "Organization".tr),
                 RegistrationButton(scale:10,onTap:(){Get.to(const SignUpScreen());}, width: width, image: Assets.imageBicycle, title: "Rider".tr)
               ],),
               Column(
@@ -70,7 +69,9 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
                     children: [
                       Image.asset(Assets.imageRight,scale: 25,),
                       SizedBox(width: width * 0.04,),
-                      Text("Organization".tr,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      InkWell(
+                          onTap: ()=>Get.to(const LoginScreen()),
+                          child: Text("Organization".tr,textAlign: TextAlign.center,style:const TextStyle(fontWeight: FontWeight.bold),)),
                     ],
                   ),
                   SizedBox(height:width * 0.04 ,),
@@ -79,7 +80,9 @@ class _RegisterAsScreenState extends State<RegisterAsScreen> {
                     children: [
                       Image.asset(Assets.imageRight,scale: 25,),
                       SizedBox(width: width * 0.04,),
-                      Text("Rider".tr +"            ",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+                      InkWell(
+                          onTap: ()=>Get.to(const login.LoginScreen()),
+                          child: Text("${"Rider".tr}            ",textAlign: TextAlign.center,style:const TextStyle(fontWeight: FontWeight.bold),)),
                     ],
                   ),
                 ],

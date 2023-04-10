@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jack_delivery/routes/routes.dart';
 import 'package:jack_delivery/translation/translation.dart';
 import 'package:jack_delivery/view/common_screen/splash_screen/splash_screen.dart';
 
@@ -8,8 +10,8 @@ import 'view/rider_screen/main_screen/main_screen.dart';
 import 'view/rider_screen/new_order_screen/new_order_screen.dart';
 import 'view/rider_screen/sign_up_screen/sign_up_screen.dart';
 
-
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -19,15 +21,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        translations: LocalString(),
-        locale: const Locale('en', 'US'),
-        theme: ThemeData(
-            primarySwatch: createMaterialColor(const Color(0xffF9B334)),
-            primaryTextTheme:
-                GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme),
-            textTheme:
-                GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme)),
-        home: const SplashScreen());
+      initialRoute: "/",
+      getPages: routes,
+      translations: LocalString(),
+      locale: const Locale('en', 'US'),
+      theme: ThemeData(
+          primarySwatch: createMaterialColor(const Color(0xffF9B334)),
+          primaryTextTheme:
+              GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme),
+          textTheme:
+              GoogleFonts.quicksandTextTheme(Theme.of(context).textTheme)),
+    );
   }
 
   MaterialColor createMaterialColor(Color color) {
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
     for (int i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
     }
-    strengths.forEach((strength){
+    strengths.forEach((strength) {
       final double ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
         r + ((ds < 0 ? r : (255 - r)) * ds).round(),

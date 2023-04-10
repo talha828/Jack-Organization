@@ -22,6 +22,8 @@ class _OrganizationCategoryScreenState
   String title = "Fast Food";
   String image = Assets.imageBurger;
   bool isSelected = true;
+
+  int index = -1;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -32,12 +34,7 @@ class _OrganizationCategoryScreenState
           backgroundColor: Colors.white,
           elevation: 0.0,
           centerTitle: true,
-          title: Text(
-            "Organization".tr,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          title: Text("Organization".tr, style: textBold),
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(
@@ -55,11 +52,8 @@ class _OrganizationCategoryScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                "chose_your_category".tr,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+              Text("chose_your_category".tr,
+                  textAlign: TextAlign.center, style: textBold),
               SizedBox(
                 height: width * 0.06,
               ),
@@ -80,6 +74,7 @@ class _OrganizationCategoryScreenState
                                   i.isSelected = false;
                                 }
                               }
+                              index = 0;
                             });
                           },
                           isSelected: list[0].isSelected,
@@ -91,11 +86,12 @@ class _OrganizationCategoryScreenState
                               for (var i in list) {
                                 if (i.title == list[1].title) {
                                   list[1].isSelected =
-                                  list[1].isSelected ? false : true;
+                                      list[1].isSelected ? false : true;
                                 } else {
                                   i.isSelected = false;
                                 }
                               }
+                              index = 1;
                             });
                           },
                           isSelected: list[1].isSelected,
@@ -107,11 +103,12 @@ class _OrganizationCategoryScreenState
                               for (var i in list) {
                                 if (i.title == list[2].title) {
                                   list[2].isSelected =
-                                  list[2].isSelected ? false : true;
+                                      list[2].isSelected ? false : true;
                                 } else {
                                   i.isSelected = false;
                                 }
                               }
+                              index = 2;
                             });
                           },
                           isSelected: list[2].isSelected,
@@ -123,11 +120,12 @@ class _OrganizationCategoryScreenState
                               for (var i in list) {
                                 if (i.title == list[3].title) {
                                   list[3].isSelected =
-                                  list[3].isSelected ? false : true;
+                                      list[3].isSelected ? false : true;
                                 } else {
                                   i.isSelected = false;
                                 }
                               }
+                              index = 3;
                             });
                           },
                           isSelected: list[3].isSelected,
@@ -139,27 +137,29 @@ class _OrganizationCategoryScreenState
                               for (var i in list) {
                                 if (i.title == list[4].title) {
                                   list[4].isSelected =
-                                  list[4].isSelected ? false : true;
+                                      list[4].isSelected ? false : true;
                                 } else {
                                   i.isSelected = false;
                                 }
                               }
+                              index = 4;
                             });
                           },
                           isSelected: list[4].isSelected,
                           image: list[4].image,
-                          title:"general_store".tr),
+                          title: "general_store".tr),
                       CategoryCard(
                           onTap: () {
                             setState(() {
                               for (var i in list) {
                                 if (i.title == list[5].title) {
                                   list[5].isSelected =
-                                  list[5].isSelected ? false : true;
+                                      list[5].isSelected ? false : true;
                                 } else {
                                   i.isSelected = false;
                                 }
                               }
+                              index = 5;
                             });
                           },
                           isSelected: list[5].isSelected,
@@ -169,7 +169,11 @@ class _OrganizationCategoryScreenState
               ),
               ElevatedButton(
                   onPressed: () {
-                    Get.to(const SignUpScreen());
+                    index == -1
+                        ? Get.snackbar("Please Select category",
+                            "You must need to set category in order to proceed",
+                            margin: EdgeInsets.symmetric(vertical: width * 0.05, horizontal: width * 0.04))
+                        : Get.toNamed("/org_sign_up/",parameters: {"category":category[index]});
                   },
                   child: Text("Continue".tr))
             ],
@@ -178,7 +182,7 @@ class _OrganizationCategoryScreenState
       ),
     );
   }
-
+  List<String>category=["Fast Food","Groceries","Gifts","Medical Store","General Store","Others"];
   List<CategoryCardModel> list = [
     CategoryCardModel(
         title: "fast_food".tr, image: Assets.imageBurger, isSelected: false),
