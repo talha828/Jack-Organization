@@ -139,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           email: email.text,
                           phoneNumber: phone.text,
                           password: password.text,
-                          category: category!,
+                          category: category ?? "gift",
                           width: width,
                           user: user,
                           setLoading: (bool value)=>setState(()=>isLoading=value),

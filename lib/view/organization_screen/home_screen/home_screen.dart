@@ -1,11 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:jack_delivery/GetXModel/GetUserModel.dart';
+import 'package:jack_delivery/backend/organization_backend/backend.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
 import 'package:jack_delivery/generated/assets.dart';
 
+import '../../../component/widgets/total_number_of_delivery_card.dart';
+import '../../../model/get_order_model.dart';
 import '../drawer_screen/drawer_screen.dart';
 import '../order_tracking_screen/order_tracking_screen.dart';
 
@@ -19,6 +25,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
+
+  final user=Get.find<GetUserModel>();
 
   static CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(24.844780, 67.081071),
@@ -34,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // Initial Selected Value
   String dropdownvalue = 'chose_rider'.tr;
 
-  // List of items in our dropdown menu
   var items = [
     'chose_rider'.tr,
     'Item 2',
@@ -42,12 +49,30 @@ class _HomeScreenState extends State<HomeScreen> {
     'Item 4',
     'Item 5',
   ];
+  GetOrderModel? order;
+  getOrderDetails()async{
+    var response=await BackEnd.getOrder();
+    var data = jsonDecode(response.body);
+    if (data['success'] == true){
+    order= GetOrderModel.fromJson(data);
+    setState(() {});
+    }else{
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    }
+
   }
 
+
+
+  String totalNumberOfDelivery= "24";
+  String date="24-12-2023";
+  var onTap=(){};
+
+   @override
+  void initState() {
+    getOrderDetails();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -69,6 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
         //   LanguageDropDown(width: width),
         // ],
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: ()=>getOrderDetails(),
+      //   child: Icon(Icons.add),
+      // ),
       body: Container(
         padding: EdgeInsets.symmetric(
             vertical: width * 0.04, horizontal: width * 0.04),
@@ -77,93 +106,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Row(
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: width * 0.04, horizontal: width * 0.04),
-                  width: width * 0.48,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(-2, 2),
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 7,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        "total_delivery_today".tr,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: width * 0.06),
-                      ),
-                      SizedBox(
-                        height: width * 0.04,
-                      ),
-                      Text(
-                        "24",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: appYellowColor,
-                            fontSize: width * 0.07),
-                      ),
-                      SizedBox(
-                        height: width * 0.04,
-                      ),
-                      Text(
-                        "24-12-2023",
-                        textAlign: TextAlign.end,
-                        style: TextStyle(fontSize: width * 0.04),
-                      ),
-                    ],
-                  ),
-                ),
+                TotalNumberOfDeliveryCard(onTap: (){}, width: width, totalNumberOfDelivery: order == null ?"0":order!.count.toString(), date: order == null ?"--_--_--":order!.data!.last.createdAt!.substring(0,10)),
                 SizedBox(
                   width: width * 0.04,
                 ),
-                InkWell(
-                  onTap: ()=>Get.to(const OrderTrackingScreen()),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: width * 0.04, horizontal: width * 0.04),
-                    width: width * 0.4,
-                    height: width * 0.45,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: const Offset(-2, 2),
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 7,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "track_order".tr,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: width * 0.055),
-                        ),
-                        SizedBox(
-                          height: width * 0.04,
-                        ),
-                        Image.asset(
-                          Assets.imageTrack,
-                          scale: 1.3,
-                        )
-                      ],
-                    ),
-                  ),
-                )
+                OrderTrackerCard(onTap: ()=>Get.to(const OrderTrackingScreen()), width: width)
               ],
             ),
             SizedBox(
@@ -207,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               children: [
                 SizedBox(
-                  height: width * 0.87,
+                  height: width,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: GoogleMap(
@@ -307,5 +254,58 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ));
+  }
+}
+
+class OrderTrackerCard extends StatelessWidget {
+  const OrderTrackerCard({
+    super.key,
+    required this.onTap,
+    required this.width,
+  });
+
+  final Function() onTap;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap:onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+            vertical: width * 0.04, horizontal: width * 0.04),
+        width: width * 0.4,
+        height: width * 0.45,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(-2, 2),
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 7,
+                spreadRadius: 5,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              "track_order".tr,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: width * 0.055),
+            ),
+            SizedBox(
+              height: width * 0.04,
+            ),
+            Image.asset(
+              Assets.imageTrack,
+              scale: 1.3,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -100,13 +100,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   },
                   appContext: context,
                 ),
-                Text(
-                  "change_number".tr,
-                  textAlign: TextAlign.center,
-                  style:const TextStyle(fontWeight: FontWeight.bold),
+                InkWell(
+                  onTap: ()=>Get.toNamed('/org_category/'),
+                  child: Text(
+                    "change_number".tr,
+                    textAlign: TextAlign.center,
+                    style:const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 ElevatedButton(
-                    onPressed: ()=>BackEnd.otpVerification(otp:otp! , width: width,setLoading: (bool value)=>setState(()=>isLoading=value),token:box.read("token")), child: Text("confirm".tr)),
+                    onPressed: ()=>BackEnd.otpVerification(otp:otp! , width: width,setLoading: (bool value)=>setState(()=>isLoading=value),userId:box.read("userId")), child: Text("confirm".tr)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -115,7 +118,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       width: width * 0.02,
                     ),
                     InkWell(
-                        onTap: (){},
+                        onTap: ()=>Get.toNamed('/org_category/'),
                         child: Text(
                           "resend".tr,
                           style: const TextStyle(fontWeight: FontWeight.bold),
