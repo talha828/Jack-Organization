@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jack_delivery/model/drawer_model.dart';
 import 'package:jack_delivery/view/common_screen/splash_screen/splash_screen.dart';
 
@@ -19,6 +20,7 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  GetStorage box= GetStorage();
   @override
   Widget build(BuildContext context) {
     var width=MediaQuery.of(context).size.width;
@@ -51,6 +53,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     Get.to(const AboutUsScreen());
                     break;
                   case 3:
+                    box.write("user_type",null);
+                    box.write("email",null);
+                    box.write("password",null);
                     Get.to(const SplashScreen());
                     break;
                 }

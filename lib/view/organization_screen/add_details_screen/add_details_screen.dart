@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jack_delivery/model/userModel.dart';
 import 'package:jack_delivery/utilities/utilities.dart';
 
+import '../../../GetXModel/GetOrderDetailsModel.dart';
 import '../../../GetXModel/GetUserModel.dart';
 import '../../../component/constant/constant.dart';
 import '../../../component/widgets/add_details_text_fields_screen.dart';
@@ -22,6 +23,8 @@ class _AddDetailsScreenState extends State<AddDetailsScreen> {
   final user = Get.find<GetUserModel>();
   final List<TextEditingController> _controller =
       List.generate(5, (index) => TextEditingController());
+  final order = Get.put(GetOrderDetailsModel());
+
   int maxline = 1;
   int _groupValue = -1;
   String hintText = "Enter text here";
@@ -114,19 +117,20 @@ class _AddDetailsScreenState extends State<AddDetailsScreen> {
                     ],
                   ),
                   ElevatedButton(
-                      onPressed: () => Utilities.postOrderDetails(
+                      onPressed: (){ Utilities.postOrderDetails(
                           name: _controller[0].text,
                           number: _controller[1].text,
                           address: _controller[2].text,
                           landmark: _controller[3].text,
                           details: _controller[4].text,
+                          order: order,
                           status: _groupValue == 0 ? "Completed" : "Pending",
                           lat: "114.5110151",
                           long: "-8.4556973",
                           width: width,
                           setLoading: (bool value) =>
                               setState(() => isLoading = value),
-                          token: user.user.value.user!.token!),
+                          token: user.user.value.user!.token!);},
                       child: Text("confirm".tr)),
                 ],
               ),

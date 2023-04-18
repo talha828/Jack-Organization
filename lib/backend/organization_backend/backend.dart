@@ -42,6 +42,16 @@ class BackEnd {
     return response;
   }
 
+  static getRider({required String token}) async {
+    Uri url = Uri.parse("https://jackdelivery-full-backend.onrender.com/api/users/profile");
+    print("url getOrders:https://jackdelivery-full-backend.onrender.com/api/orders");
+    var response =
+    await http.get(url,headers: {
+      'Authorization': 'Bearer $token',
+    },);
+    return response;
+  }
+
   static Future postOrder(
       {required String name,
       required String number,

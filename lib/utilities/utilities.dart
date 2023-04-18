@@ -8,7 +8,9 @@ import 'package:jack_delivery/GetXModel/GetUserModel.dart';
 import 'package:jack_delivery/backend/organization_backend/backend.dart';
 import 'package:jack_delivery/helper/helper.dart';
 
+import '../GetXModel/GetOrderDetailsModel.dart';
 import '../backend/organization_backend/auth.dart';
+import '../model/add_order_details_model.dart';
 import '../model/errorMessageModel.dart';
 import '../model/userModel.dart';
 
@@ -138,6 +140,7 @@ class Utilities {
       required String details,
       required String status,
       required String lat,
+      required GetOrderDetailsModel order,
       required String long,
       required double width,
       required setLoading,
@@ -155,20 +158,31 @@ class Utilities {
 
     if (index == -1) {
       setLoading(true);
-     await  Geolocator.requestPermission();
-      Position location=await Geolocator.getCurrentPosition();
+      await Geolocator.requestPermission();
+      Position location = await Geolocator.getCurrentPosition();
+      order.order.value = AddOrderDetails(
+        rider: name,
+        mobile: number,
+        address: address,
+        nearestLandmark: landmark,
+        orderDetails: details,
+        paymentStatus: status,
+        latitude: location.latitude,
+        longitude: location.longitude,
+      );
       var response = await BackEnd.postOrder(
-          name: name,
-          number: number,
-          address: address,
-          landmark: landmark,
-          details: details,
-          status: status,
-          lat: location.latitude.toString(),
-          long: location.longitude.toString(),
-          token: token).catchError((e){
-           setLoading(false);
-            print(e.toString());
+              name: name,
+              number: number,
+              address: address,
+              landmark: landmark,
+              details: details,
+              status: status,
+              lat: location.latitude.toString(),
+              long: location.longitude.toString(),
+              token: token)
+          .catchError((e) {
+        setLoading(false);
+        print(e.toString());
       });
       var data = jsonDecode(response.body);
       print(data.toString());
