@@ -25,6 +25,24 @@ class Auth {
     return response;
   }
 
+  static Future<Response> riderSignUp({
+    required String name,
+    required String numberPlate,
+    required String email,
+    required String phoneNumber,
+    required String password,
+  }) async {
+    Uri url = Uri.parse("$directory/api/register");
+    Response response = await http.post(url, body: {
+      "organizationName": name,
+      "email": email,
+      "mobile": phoneNumber,
+      "vehiclenumberplate": numberPlate,
+      "password": password,
+    });
+    return response;
+  }
+
   static Future<Response> login(
       {required String email, required String password}) async {
     Uri url = Uri.parse("$directory/api/login");

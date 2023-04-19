@@ -156,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: width * 0.02,
                       ),
                       InkWell(
-                          onTap: () {},
+                          onTap: ()=>Get.toNamed("/org_login/"),
                           child: Text(
                             "login".tr,
                             style: const TextStyle(fontWeight: FontWeight.bold),

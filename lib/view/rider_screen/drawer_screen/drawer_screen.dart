@@ -4,6 +4,7 @@ import 'package:jack_delivery/model/drawer_model.dart';
 import 'package:jack_delivery/view/rider_screen/about_us_screen/about_us_screen.dart';
 import 'package:jack_delivery/view/rider_screen/notification_screen/notification_screen.dart';
 import 'package:jack_delivery/view/rider_screen/wallet_screen/wallet_screen.dart';
+import '../../../GetXModel/GetUserModel.dart';
 import '../../../component/constant/constant.dart';
 import '../../../generated/assets.dart';
 import '../../common_screen/splash_screen/splash_screen.dart';
@@ -16,6 +17,8 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+
+  final user = Get.find<GetUserModel>();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -60,7 +63,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 Column(
                   children: [
                     Text(
-                      "Talha Iqbal",
+                      user.user.value.user!.organizationName!.toUpperCase()!,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: width * 0.06),
                     ),
@@ -68,7 +71,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       height: width * 0.03,
                     ),
                     Text(
-                      "+923012070920",
+                      user.user.value.user!.mobile!,
                       style: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w300,

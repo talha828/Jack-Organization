@@ -15,6 +15,7 @@ import '../model/errorMessageModel.dart';
 import '../model/userModel.dart';
 
 class Utilities {
+
   static organizationSignUp(
       {required String name,
       required String cr,
@@ -78,7 +79,7 @@ class Utilities {
       required String phoneNumber,
       required String password}) {
     if (name.isEmpty) return 0;
-    if (!GetUtils.isNum(cr)) return 1;
+    if (cr.isEmpty) return 1;
     if (!GetUtils.isEmail(email)) return 2;
     if (!GetUtils.isPhoneNumber(phoneNumber)) return 3;
     if (!regExp.hasMatch(password)) return 4;
@@ -128,7 +129,7 @@ class Utilities {
   static int loginValidation(
       {required String email, required String password}) {
     if (!GetUtils.isEmail(email)) return 2;
-    if (!regExp.hasMatch(password)) return 3;
+    if (!regExp.hasMatch(password)) return 4;
     return -1;
   }
 
@@ -226,4 +227,62 @@ class Utilities {
     if (token.isEmpty) return 3;
     return -1;
   }
+
+
+
+  //rider
+  static riderSignUp(
+      {required String name,
+        required String numberPlate,
+        required String email,
+        required String phoneNumber,
+        required String password,
+        required double width,
+        required GetUserModel user,
+        required var setLoading,
+        required GetStorage box}) async {
+    setLoading(true);
+    int index = validation(
+        name: name,
+        email: email,
+        password: password,
+        cr: numberPlate,
+        phoneNumber: phoneNumber);
+    if (index == -1) {
+      var response = await Auth.riderSignUp(
+          name: name,
+          numberPlate: numberPlate,
+          email: email,
+          phoneNumber: phoneNumber,
+          password: password);
+      var data = jsonDecode(response.body);
+      if (data['success'] == true) {
+        user.user.value = UserModel.fromJson(data);
+
+        box.write("email", email);
+        box.write("password", password);
+        box.write("user_type", "rider");
+        box.write("userId", user.user.value.user!.sId);
+        Get.toNamed("/rider_otp_verify/");
+        Get.snackbar("Verify Your Email", data['message'].toString(),
+            margin: EdgeInsets.symmetric(
+                vertical: width * 0.05, horizontal: width * 0.04));
+        setLoading(false);
+      } else {
+        setLoading(false);
+        Get.snackbar("Something went wrong", data['message'].toString(),
+            margin: EdgeInsets.symmetric(
+                vertical: width * 0.05, horizontal: width * 0.04));
+      }
+    } else {
+      setLoading(false);
+      Get.snackbar(
+        error[index].title,
+        error[index].subtitle,
+        margin: EdgeInsets.symmetric(
+            vertical: width * 0.05, horizontal: width * 0.04),
+      );
+    }
+  }
+
 }

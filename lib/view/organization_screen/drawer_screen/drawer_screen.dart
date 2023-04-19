@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:jack_delivery/model/drawer_model.dart';
 import 'package:jack_delivery/view/common_screen/splash_screen/splash_screen.dart';
-
 import '../../../component/constant/constant.dart';
 import '../../../generated/assets.dart';
 import '../about_us_screen/about_us_screen.dart';

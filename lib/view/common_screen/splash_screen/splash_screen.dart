@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
           var data = jsonDecode(response.body);
           if (data['success'] == true) {
             user.user.value = UserModel.fromJson(data);
-            Get.toNamed("/org_main/");
+            Get.toNamed("/rider_main/");
           }else{
             Get.snackbar("Something went wrong", data['message'].toString(),
                 margin:const EdgeInsets.symmetric(
