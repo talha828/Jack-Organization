@@ -126,6 +126,46 @@ class Utilities {
     }
   }
 
+  static riderLogin({
+    required String email,
+    required String password,
+    required var setLoading,
+    required double width,
+    required GetUserModel user,
+    required GetStorage box,
+  }) async {
+    int index = loginValidation(email: email, password: password);
+
+    if (index == -1) {
+      setLoading(true);
+      var response = await Auth.login(email: email, password: password);
+      var data = jsonDecode(response.body);
+      if (data['success'] == true) {
+        user.user.value = UserModel.fromJson(data);
+        box.write("email", email);
+        box.write("password", password);
+        box.write("user_type", "rider");
+        box.write("userId", user.user.value.user!.sId);
+        Get.toNamed("/rider_main/");
+        setLoading(false);
+      } else {
+        setLoading(false);
+        Get.snackbar("Something went wrong", data['message'].toString(),
+            margin: EdgeInsets.symmetric(
+                vertical: width * 0.05, horizontal: width * 0.04));
+      }
+    } else {
+      setLoading(false);
+
+      Get.snackbar(
+        error[index].title,
+        error[index].subtitle,
+        margin: EdgeInsets.symmetric(
+            vertical: width * 0.05, horizontal: width * 0.04),
+      );
+    }
+  }
+
   static int loginValidation(
       {required String email, required String password}) {
     if (!GetUtils.isEmail(email)) return 2;

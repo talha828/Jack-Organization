@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jack_delivery/model/drawer_model.dart';
 import 'package:jack_delivery/view/rider_screen/about_us_screen/about_us_screen.dart';
 import 'package:jack_delivery/view/rider_screen/notification_screen/notification_screen.dart';
@@ -17,7 +18,7 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
-
+  GetStorage box= GetStorage();
   final user = Get.find<GetUserModel>();
   @override
   Widget build(BuildContext context) {
@@ -51,16 +52,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       radius: width / 8,
                       child: Image.asset(Assets.imagePersonImage),
                     ),
-                    const CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.add_a_photo,
-                        color: appYellowColor,
-                      ),
-                    ),
+                    // const CircleAvatar(
+                    //   backgroundColor: Colors.white,
+                    //   child: Icon(
+                    //     Icons.add_a_photo,
+                    //     color: appYellowColor,
+                    //   ),
+                    // ),
                   ],
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       user.user.value.user!.organizationName!.toUpperCase()!,
@@ -79,7 +81,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ),
                   ],
                 ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.edit,color: appYellowColor,size: width * 0.07,))
+                // IconButton(onPressed: (){}, icon: Icon(Icons.edit,color: appYellowColor,size: width * 0.07,))
               ],
             ),
           ),
@@ -100,6 +102,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           Get.to(const AboutUsScreen());
                           break;
                         case 3:
+                          box.write("user_type",null);
+                          box.write("email",null);
+                          box.write("password",null);
                           Get.to(const SplashScreen());
                           break;
                       }

@@ -8,12 +8,9 @@ import 'package:jack_delivery/GetXModel/GetUserModel.dart';
 import 'package:jack_delivery/backend/organization_backend/auth.dart';
 import 'package:jack_delivery/generated/assets.dart';
 import 'package:jack_delivery/utilities/utilities.dart';
-
 import '../../../component/constant/constant.dart';
 import '../../../component/widgets/language_dropdown.dart';
 import '../../../component/widgets/loading_indicator.dart';
-import '../main_screen/main_screen.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -23,14 +20,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController email=TextEditingController();
-  TextEditingController password=TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   bool _passwordVisible = false;
   bool _check = true;
-  bool isLoading=false;
+  bool isLoading = false;
   final user = Get.put(GetUserModel());
   GetStorage box = GetStorage();
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +61,17 @@ class _LoginScreenState extends State<LoginScreen> {
             body: SingleChildScrollView(
               child: Container(
                 height: height * 0.9,
-                padding: EdgeInsets.symmetric(vertical: width * 0.04,horizontal: width * 0.04),
+                padding: EdgeInsets.symmetric(
+                    vertical: width * 0.04, horizontal: width * 0.04),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Image.asset(Assets.imageRiderSignUp,width: width *0.5,height: width * 0.5,),
+                    Image.asset(
+                      Assets.imageRiderSignUp,
+                      width: width * 0.5,
+                      height: width * 0.5,
+                    ),
                     CustomTextField(
                       prefixImage: Assets.iconEmail,
                       suffixImage: Assets.iconAsterisk,
@@ -80,13 +81,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: width,
                     ),
                     CustomTextField(
-                      onTapSuffix: (){
+                      onTapSuffix: () {
                         setState(() {
                           _passwordVisible = !_passwordVisible;
                         });
                       },
                       prefixImage: Assets.iconEmail,
-                      suffixImage:_passwordVisible?Assets.iconHide : Assets.iconView,
+                      suffixImage:
+                          _passwordVisible ? Assets.iconHide : Assets.iconView,
                       hintText: 'password'.tr,
                       iconColor: appRedColor,
                       controller: password,
@@ -95,39 +97,67 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(children: [
-                          Checkbox(value: _check, onChanged: (value){
-                            setState(() {
-                              _check=value!;
-                            });
-                          }),
-                          Text("remember_me".tr,style: textBold,),
-                        ],),
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: _check,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _check = value!;
+                                  });
+                                }),
+                            Text(
+                              "remember_me".tr,
+                              style: textBold,
+                            ),
+                          ],
+                        ),
                         InkWell(
-                            onTap: ()async{
-                              if(email.text.isNotEmpty && GetUtils.isEmail(email.text)){
-                                var response = await Auth.forgetPassword(email: email.text);
+                            onTap: () async {
+                              if (email.text.isNotEmpty &&
+                                  GetUtils.isEmail(email.text)) {
+                                var response = await Auth.forgetPassword(
+                                    email: email.text);
                                 var data = jsonDecode(response.body);
                                 if (data['success'] == true) {
-                                  Get.snackbar("Please check your email", data['msg'].toString(),
+                                  Get.snackbar("Please check your email",
+                                      data['msg'].toString(),
                                       margin: EdgeInsets.symmetric(
-                                          vertical: width * 0.05, horizontal: width * 0.04));
-                                }else{
-                                  Get.snackbar("Something went wrong", data['msg'].toString(),
+                                          vertical: width * 0.05,
+                                          horizontal: width * 0.04));
+                                } else {
+                                  Get.snackbar("Something went wrong",
+                                      data['msg'].toString(),
                                       margin: EdgeInsets.symmetric(
-                                          vertical: width * 0.05, horizontal: width * 0.04));
+                                          vertical: width * 0.05,
+                                          horizontal: width * 0.04));
                                 }
-                              }else{
-                                Get.snackbar("Invalid Email", "Please input a valid email",
+                              } else {
+                                Get.snackbar("Invalid Email",
+                                    "Please input a valid email",
                                     margin: EdgeInsets.symmetric(
-                                        vertical: width * 0.05, horizontal: width * 0.04));
+                                        vertical: width * 0.05,
+                                        horizontal: width * 0.04));
                               }
                             },
                             child: Text("forget_password".tr))
                       ],
                     ),
-                    SizedBox(height: width * 0.02,),
-                    ElevatedButton(onPressed: ()=>Utilities.organizationLogin(email: email.text,setLoading:(bool value)=>setState((){isLoading=value;}), password: password.text, width: width, user:user , box:box,), child:Text("login".tr)),
+                    SizedBox(
+                      height: width * 0.02,
+                    ),
+                    ElevatedButton(
+                        onPressed: () => Utilities.riderLogin(
+                              email: email.text,
+                              setLoading: (bool value) => setState(() {
+                                isLoading = value;
+                              }),
+                              password: password.text,
+                              width: width,
+                              user: user,
+                              box: box,
+                            ),
+                        child: Text("login".tr)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -136,10 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: width * 0.02,
                         ),
                         InkWell(
-                            onTap: ()=>Get.toNamed('/org_category/'),
+                            onTap: () => Get.toNamed('/rider_sign_up/'),
                             child: Text(
                               "signup".tr,
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             )),
                       ],
                     )
@@ -150,8 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           isLoading
               ? Positioned.fill(
-            child: LoadingIndicator(),
-          )
+                  child: LoadingIndicator(),
+                )
               : Container(),
         ],
       ),

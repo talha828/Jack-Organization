@@ -27,13 +27,14 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
     var data = jsonDecode(response.body);
     if (data['success'] == true) {
       order = GetOrderModel.fromJson(data);
-      // List<Data> dd= order!.data!;
-      // order!.data!.clear();
-      // for(var i in dd){
-      //   if(i.sId == user.user.value.user!.sId){
-      //     order!.data!.add(i);
-      //   }
-      // }
+      List<Data> dd=[];
+      dd.addAll(order!.data!);
+      order!.data!.clear();
+      for(var i in dd){
+        if(i.orderstatus == "Pending"){
+          order!.data!.add(i);
+        }
+      }
       print(user.user.value.user!.token);
       setState(() {});
     } else {
@@ -64,9 +65,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
               color: appRedColor,
             ),
           ),
-          // actions: [
-          //   LanguageDropDown(width: width),
-          // ],
         ),
         body: Container(
             padding: EdgeInsets.symmetric(
