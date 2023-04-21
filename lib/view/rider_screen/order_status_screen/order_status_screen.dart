@@ -109,7 +109,7 @@ class _OrderStatusScreenState extends State<OrderStatusScreen> {
                                       style: TextStyle(fontSize: width * 0.04),
                                     ),
                                     Checkbox(
-                                        value: order!.data![index].paymentStatus! == "Completed"?true:false,
+                                        value: order!.data![index].orderstatus! == "Delivered"?true:false,
                                         onChanged: (value) async{
                                           // var response=await http.put(Uri.parse("https://jackdelivery-full-backend.onrender.com/api/orderStatus/${order!.data![index].sId}"),headers: {  'Authorization': 'Bearer ${user.user.value.user!.token}',},body: {
                                           //   "Orderstatus":"Delivered",
@@ -118,25 +118,20 @@ class _OrderStatusScreenState extends State<OrderStatusScreen> {
                                           // print(data.toString());
                                           setLoading(true);
                                           final Uri uri = Uri.parse('https://jackdelivery-full-backend.onrender.com/api/update/${order!.data![index].sId}');
-                                          final Map<String, dynamic> orderData = {'PaymentStatus': value! ?"Completed":"Pending"};
+                                          final Map<String, dynamic> orderData = {'Orderstatus': value == true ?'Delivered':"Pending"};
 
                                           try {
                                             final response = await http.put(uri,
                                                 headers: {'Authorization': 'Bearer ${user.user!.value.user!.token}'},
-                                                body: json.encode(orderData));
+                                                body: orderData);
                                             var dd=jsonDecode(response.body);
                                             print(dd.toString());
                                             if (response.statusCode == 200) {
                                               setLoading(false);
-                                              Get.snackbar("Congratulation", "Order Update Successfully",
+                                              getOrderDetails();
+                                              Get.snackbar("Congratulation", "Order Accept Successfully",
                                                   margin: EdgeInsets.symmetric(
                                                       vertical: width * 0.05, horizontal: width * 0.04));
-                                              setState(() {
-                                                _check = value!;
-                                                order!.data![index].paymentStatus =value?"Completed":"Pending";
-                                                // order=null;
-                                              });
-                                              // Get.toNamed('/rider_main/');
                                             } else {
                                               setLoading(false);
                                               Get.snackbar("Something went wrong", "Order Can`t be Updated",
@@ -149,6 +144,39 @@ class _OrderStatusScreenState extends State<OrderStatusScreen> {
                                                 margin: EdgeInsets.symmetric(
                                                     vertical: width * 0.05, horizontal: width * 0.04));
                                           }
+                                          // setLoading(true);
+                                          // final Uri uri = Uri.parse('https://jackdelivery-full-backend.onrender.com/api/update/${order!.data![index].sId}');
+                                          // final Map<String, dynamic> orderData = {'PaymentStatus': value! ?"Completed":"Pending"};
+                                          //
+                                          // try {
+                                          //   final response = await http.put(uri,
+                                          //       headers: {'Authorization': 'Bearer ${user.user!.value.user!.token}'},
+                                          //       body: json.encode(orderData));
+                                          //   var dd=jsonDecode(response.body);
+                                          //   print(dd.toString());
+                                          //   if (response.statusCode == 200) {
+                                          //     setLoading(false);
+                                          //     Get.snackbar("Congratulation", "Order Update Successfully",
+                                          //         margin: EdgeInsets.symmetric(
+                                          //             vertical: width * 0.05, horizontal: width * 0.04));
+                                          //     setState(() {
+                                          //       _check = value!;
+                                          //       order!.data![index].paymentStatus =value?"Completed":"Pending";
+                                          //       // order=null;
+                                          //     });
+                                          //     // Get.toNamed('/rider_main/');
+                                          //   } else {
+                                          //     setLoading(false);
+                                          //     Get.snackbar("Something went wrong", "Order Can`t be Updated",
+                                          //         margin: EdgeInsets.symmetric(
+                                          //             vertical: width * 0.05, horizontal: width * 0.04));
+                                          //   }
+                                          // } catch (error) {
+                                          //   setLoading(false);
+                                          //   Get.snackbar("Something went wrong", "Order Can`t be Updated",
+                                          //       margin: EdgeInsets.symmetric(
+                                          //           vertical: width * 0.05, horizontal: width * 0.04));
+                                          // }
                                           // if(response.statusCode == 200){
                                           //   getOrderDetails();
                                           // }

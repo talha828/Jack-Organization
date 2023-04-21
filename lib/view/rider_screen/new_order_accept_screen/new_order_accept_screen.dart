@@ -111,7 +111,7 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                     try {
                       final response = await http.put(uri,
                           headers: {'Authorization': 'Bearer ${user.user!.value.user!.token}'},
-                          body: json.encode(orderData));
+                          body: orderData);
                       var dd=jsonDecode(response.body);
                       print(dd.toString());
                       if (response.statusCode == 200) {

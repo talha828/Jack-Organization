@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.talhaiqbal.jack.jack_delivery">
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE"/>
    <application
         android:label="jack_delivery"
         android:name="${applicationName}"
@@ -9,6 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:requestLegacyExternalStorage="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -33,7 +37,7 @@
         <meta-data android:name="flutterEmbedding"
             android:value="2" />
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyAoSbver7G9emTgsZMM4RCAXt3z5pjauYE"/>
+           android:value="AIzaSyDYwksMiV-XKt01MmDPbGghlLJ9PC7EyKU"/>
     </application>
     <queries>
         <intent>

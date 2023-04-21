@@ -39,6 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'Car',
     'Other',
   ];
+  bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -126,13 +127,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: width * 0.04,
                       ),
                       CustomTextField(
-                        prefixImage: Assets.iconPadlock,
-                        suffixImage: Assets.iconAsterisk,
+                        onTapSuffix: () {
+                          setState(() {
+                            _passwordVisible = !_passwordVisible;
+                          });
+                        },
+                        prefixImage: Assets.iconEmail,
+                        suffixImage:
+                        _passwordVisible ? Assets.iconHide : Assets.iconView,
                         hintText: 'password'.tr,
                         iconColor: appRedColor,
                         controller: password,
                         width: width,
                       ),
+                      // CustomTextField(
+                      //   prefixImage: Assets.iconPadlock,
+                      //   suffixImage: Assets.iconAsterisk,
+                      //   hintText: 'password'.tr,
+                      //   iconColor: appRedColor,
+                      //   controller: password,
+                      //   width: width,
+                      // ),
                       // AddDetailsTextField(controller: crNumber, maxline: 1, hintText: "Vehicle Number plate".tr, width: width),
                       // AddDetailsTextField(controller: crNumber, maxline: 1, hintText: "Vehicle Number plate".tr, width: width),
                     ],
