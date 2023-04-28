@@ -104,7 +104,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          user.user.value.user!.organizationName!
+                          user.user.value.user!.riderName!
                               .toUpperCase()!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,

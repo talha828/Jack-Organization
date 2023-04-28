@@ -38,7 +38,7 @@ class LocalString extends Translations {
           "create_a_new_account": "Create a new Account",
           "total_delivery_today":"Total Delivery Today",
           "track_order":"Track Order",
-          "rider_live_location":"Rider Live Location",
+          "rider_live_location":"Live Location",
           "chose_rider":"Choose Rider",
           "estimate_delivery":"Estimated delivery in 25 mints",
           "home":"Home",
@@ -82,6 +82,11 @@ class LocalString extends Translations {
           "your_wallet":"Your Wallet",
           "google_map":"Google Map",
           "chose_your_category":"Choose Your Category",
+          "about":"Jack Delivery is a mobile application that offers a seamless and convenient way for users to order and receive various goods and services from their favorite merchants. Whether it's food, groceries, medication, or other essentials, users can browse through a range of products available from nearby stores and place an order with just a few taps on their mobile devices."
+
+              "At Jack Delivery, we strive to provide a hassle-free and efficient delivery experience to our users. Our app is designed to make the ordering process simple and intuitive, with features such as real-time order tracking, secure payment options, and personalized recommendations based on the user's preferences and location."
+
+              "We work with a network of trusted and reliable delivery partners to ensure that orders are delivered promptly and safely to the user's doorstep. Our delivery partners are equipped with the latest technology to optimize delivery routes and minimize delivery times while maintaining the highest standards of safety and hygiene."
         },
         'ar_SU': {
           "term_and_condition_title": "شروط وأحكام",
@@ -161,7 +166,12 @@ class LocalString extends Translations {
           "name":"اسم",
           "your_wallet": "محفظتك",
           "google_map": "خريطة جوجل",
-          "chose_your_category":"اختر فئتك"
+          "chose_your_category":"اختر فئتك",
+          "about":"حول التطبيق: يعد Jack Delivery تطبيقًا محمولًا يوفر وسيلة سلسة ومريحة للمستخدمين لطلب واستلام مختلف السلع والخدمات من التجار المفضلين لديهم. سواء كان الأمر يتعلق بالطعام أو البقالة أو الأدوية أو الضروريات الأخرى ، يمكن للمستخدمين تصفح مجموعة من المنتجات المتاحة من المتاجر القريبة وتقديم طلب ببضع نقرات على أجهزتهم المحمولة."
+
+              "في Jack Delivery ، نسعى جاهدين لتوفير تجربة تسليم بلا متاعب وفعالة لمستخدمينا. تم تصميم تطبيقنا لجعل عملية الطلب بسيطة وبديهية ، مع ميزات مثل تتبع الطلبات في الوقت الفعلي وخيارات الدفع الآمنة والتوصيات الشخصية استنادًا إلى تفضيلات المستخدم والموقع."
+
+              "نعمل مع شبكة من شركاء التسليم الموثوقين والموثوق بهم لضمان تسليم الطلبات بسرعة وسلامة إلى باب المستخدم. يتم تزويد شركائنا في التسليم بأحدث التقنيات لتحسين مسارات التسليم وتقليل أوقات التسليم مع الحفاظ على أعلى المعايير الصحية والنظافة."
         },
       };
 }

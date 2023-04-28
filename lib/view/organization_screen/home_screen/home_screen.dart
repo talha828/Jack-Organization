@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -68,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getRider() async {
+    print(user.user.value.user!.token!);
     var response = await BackEnd.getRider(token: user.user.value.user!.token!);
     var data = jsonDecode(response.body);
     if (response.statusCode == 200) {
@@ -96,14 +98,37 @@ class _HomeScreenState extends State<HomeScreen> {
       target: LatLng(location.latitude, location.latitude),
       zoom: 14.4746,
     );
-    setState(() {});
+    // final marke=Marker(
+    //     markerId: MarkerId("1"),
+    //     visible: false,
+    //     infoWindow: InfoWindow(
+    //       title: "My Location"
+    //     ),
+    //     position: LatLng(location.latitude, location.latitude)
+    //
+    // );
   }
 
   String totalNumberOfDelivery = "24";
   String date = "24-12-2023";
   var onSms = () {};
   var onCall = () {};
-
+  Set <Marker> markers={};
+  void _onMapCreated(GoogleMapController controller) async {
+    await Geolocator.requestPermission();
+    Position location = await Geolocator.getCurrentPosition();
+    setState(() {
+      markers.add(
+        Marker(
+            markerId:const MarkerId('5'),
+            position: LatLng(location.latitude, location.longitude),
+            infoWindow:const InfoWindow(
+              title: 'My Location',
+            )),
+      );
+      _controller.complete(controller);
+    });
+  }
   @override
   void initState() {
     dropdownvalue = items[0];
@@ -112,6 +137,35 @@ class _HomeScreenState extends State<HomeScreen> {
     getRider();
     super.initState();
   }
+  // void onMapcreated(GoogleMapController controller) {
+  //   setState(() {
+  //     markers.add(const Marker(
+  //       markerId: MarkerId('1'),
+  //       position: LatLng(13.007488, 77.598656),
+  //       infoWindow: InfoWindow(
+  //         title: 'Marker Title Second ',
+  //         snippet: 'My Custom Subtitle',
+  //       ),
+  //     ));
+  //     markers.add(const Marker(
+  //       markerId: MarkerId('2'),
+  //       position: LatLng(13.007481, 77.598651),
+  //       infoWindow: InfoWindow(
+  //         title: 'Marker Title Third ',
+  //         snippet: 'My Custom Subtitle',
+  //       ),
+  //     ));
+  //     markers.add(const Marker(
+  //       markerId: MarkerId('3'),
+  //       position: LatLng(13.001916, 77.588849),
+  //       infoWindow: InfoWindow(
+  //         title: 'Marker Title Fourth ',
+  //         snippet: 'My Custom Subtitle',
+  //       ),
+  //     ));
+  //   });
+  // }
+  late GoogleMapController mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -207,6 +261,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: GoogleMap(
+                      myLocationButtonEnabled: true,
+                       onMapCreated: _onMapCreated,
+                      markers: markers.toSet(),
                       mapType: MapType.normal,
                       initialCameraPosition: _kGooglePlex!,
                     ),

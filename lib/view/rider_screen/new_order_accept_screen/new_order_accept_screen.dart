@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jack_delivery/component/constant/constant.dart';
@@ -19,11 +20,30 @@ class NewOrderAcceptScreen extends StatefulWidget {
 }
 
 class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
-  bool isLoading=false;
+  bool isLoading = false;
 
-  setLoading(bool value){
+  setLoading(bool value) {
     setState(() {
-      isLoading=value;
+      isLoading = value;
+    });
+  }
+  Data? data;
+  Set<Marker> markers = {};
+  void _onMapCreated(GoogleMapController controller) async {
+    // Data data = Get.arguments as Data;
+    await Geolocator.requestPermission();
+    Position location = await Geolocator.getCurrentPosition();
+    setState(() {
+      markers.add(
+        Marker(
+            markerId: const MarkerId('5'),
+            position: LatLng(data!.location!.coordinates!.first,
+                data!.location!.coordinates![1]),
+            infoWindow: const InfoWindow(
+              title: 'My Location',
+            )),
+      );
+      _controller.complete(controller);
     });
   }
 
@@ -37,12 +57,12 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    Data data = Get.arguments as Data;
-    Set<Marker> marker={Marker(
-        markerId: const MarkerId('unique'),
-        infoWindow: InfoWindow(title: data.recieverName),
-        position: LatLng(data.location!.coordinates![0],data.location!.coordinates![1])
-    )};
+     data = Get.arguments as Data;
+    markers.add(Marker(
+        markerId: const MarkerId('1'),
+        infoWindow: InfoWindow(title: data!.recieverName),
+        position: LatLng(
+            data!.location!.coordinates![0], data!.location!.coordinates![1])));
 
     return SafeArea(
       child: Stack(
@@ -103,36 +123,50 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                       ),
                     ],
                   ),
-                  ElevatedButton(onPressed: ()async{
-                    setLoading(true);
-                    final Uri uri = Uri.parse('https://jackdelivery-full-backend.onrender.com/api/update/${data.sId}');
-                    final Map<String, dynamic> orderData = {'Orderstatus': 'Delivered'};
+                  ElevatedButton(
+                      onPressed: () async {
+                        setLoading(true);
+                        final Uri uri = Uri.parse(
+                            'https://jackdelivery-full-backend.onrender.com/api/update/${data!.sId}');
+                        final Map<String, dynamic> orderData = {
+                          'Orderstatus': 'Delivered'
+                        };
 
-                    try {
-                      final response = await http.put(uri,
-                          headers: {'Authorization': 'Bearer ${user.user!.value.user!.token}'},
-                          body: orderData);
-                      var dd=jsonDecode(response.body);
-                      print(dd.toString());
-                      if (response.statusCode == 200) {
-                        setLoading(false);
-                        Get.snackbar("Congratulation", "Order Accept Successfully",
-                            margin: EdgeInsets.symmetric(
-                                vertical: width * 0.05, horizontal: width * 0.04));
-                        Get.toNamed('/rider_main/');
-                      } else {
-                        setLoading(false);
-                        Get.snackbar("Something went wrong", "Order Can`t be Updated",
-                            margin: EdgeInsets.symmetric(
-                                vertical: width * 0.05, horizontal: width * 0.04));
-                      }
-                    } catch (error) {
-                      setLoading(false);
-                      Get.snackbar("Something went wrong", "Order Can`t be Updated",
-                          margin: EdgeInsets.symmetric(
-                              vertical: width * 0.05, horizontal: width * 0.04));
-                    }
-                  }, child: const Text("Accept"))
+                        try {
+                          final response = await http.put(uri,
+                              headers: {
+                                'Authorization':
+                                    'Bearer ${user.user!.value.user!.token}'
+                              },
+                              body: orderData);
+                          var dd = jsonDecode(response.body);
+                          print(dd.toString());
+                          if (response.statusCode == 200) {
+                            setLoading(false);
+                            Get.snackbar(
+                                "Congratulation", "Order Accept Successfully",
+                                margin: EdgeInsets.symmetric(
+                                    vertical: width * 0.05,
+                                    horizontal: width * 0.04));
+                            Get.toNamed('/rider_main/');
+                          } else {
+                            setLoading(false);
+                            Get.snackbar("Something went wrong",
+                                "Order Can`t be Updated",
+                                margin: EdgeInsets.symmetric(
+                                    vertical: width * 0.05,
+                                    horizontal: width * 0.04));
+                          }
+                        } catch (error) {
+                          setLoading(false);
+                          Get.snackbar(
+                              "Something went wrong", "Order Can`t be Updated",
+                              margin: EdgeInsets.symmetric(
+                                  vertical: width * 0.05,
+                                  horizontal: width * 0.04));
+                        }
+                      },
+                      child: const Text("Accept"))
                 ],
               ),
             ),
@@ -147,8 +181,9 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: GoogleMap(
-                          markers: marker,
+                          markers: markers,
                           mapType: MapType.normal,
+                          onMapCreated: _onMapCreated,
                           initialCameraPosition: _kGooglePlex,
                           zoomControlsEnabled: false,
                         ),
@@ -170,7 +205,7 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                                   fontSize: width * 0.05),
                             ),
                             InkWell(
-                              onTap: ()=>Get.back(),
+                              onTap: () => Get.back(),
                               child: Text(
                                 "Decline",
                                 style: TextStyle(
@@ -196,13 +231,13 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                             steps: [
                               Step(
                                   isActive: true,
-                                  title:const  Text("Pickup location"),
-                                  subtitle: Text(data.nearestLandmark!),
+                                  title: const Text("Pickup location"),
+                                  subtitle: Text(data!.nearestLandmark!),
                                   content: Container()),
                               Step(
                                   isActive: true,
-                                  title:const Text("Dropoff location"),
-                                  subtitle: Text(data.address!),
+                                  title: const Text("Dropoff location"),
+                                  subtitle: Text(data!.address!),
                                   content: Container()),
                             ],
                           ),
@@ -210,7 +245,7 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
                       ],
                     ),
                     ListTile(
-                      title:const Text("Estimated delivery time"),
+                      title: const Text("Estimated delivery time"),
                       subtitle: Row(
                         children: [
                           const Icon(
@@ -231,8 +266,8 @@ class _NewOrderAcceptScreenState extends State<NewOrderAcceptScreen> {
           ),
           isLoading
               ? Positioned.fill(
-            child: LoadingIndicator(),
-          )
+                  child: LoadingIndicator(),
+                )
               : Container(),
         ],
       ),

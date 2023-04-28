@@ -82,7 +82,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text(
-                      "Enter Tracking Number",
+                      "Enter Reciver Name",
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(
@@ -91,7 +91,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     AddDetailsTextField(
                         controller: _controller,
                         maxline: 1,
-                        hintText: "Track Number",
+                        hintText: "Type Here",
                         width: width),
                     SizedBox(
                       height: width * 0.05,
@@ -99,7 +99,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     ElevatedButton(
                         onPressed: ()async{
                           if(order != null){
-                          int index=  order!.data!.indexWhere((element) => element.sId!.contains(_controller.text));
+                          int index=  order!.data!.indexWhere((element) => element.recieverName!.contains(_controller.text));
                           setState(() {
                             data=order!.data![index];
                           });

@@ -79,37 +79,18 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                 height: width * 0.04,
               ),
               const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
-              SizedBox(
-                height: width * 0.04,
-              ),
-              const Text(
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure "),
+                  "User Responsibilities: Users are responsible for maintaining the confidentiality of their login details and ensuring that their account information is accurate and up to date. Users must also agree to use the app only for lawful purposes."
+
+                "Service Provision: Jack Delivery app provides delivery services as per the user's order. The app may also offer different delivery options and fees depending on the user's location, the distance between the pickup and delivery points, and other relevant factors."
+
+              "Payment: The app may require users to pay for their orders through the app using a valid payment method. Payment methods may include credit cards, debit cards, mobile wallets, or other forms of electronic payment."
+
+              "Order Cancellation: Users may be allowed to cancel their orders under certain conditions, such as if the merchant is unable to fulfill the order or if the order has not been picked up by the delivery person. The app may have specific cancellation policies and may charge a cancellation fee in some cases."
+
+                "Liability: Jack Delivery app may not be held liable for any damages, losses, or injuries resulting from the use of the app or the services provided through the app. Users may also be required to indemnify the app and its affiliates against any claims arising from their use of the app."
+
+              "App Updates: Jack Delivery app may update its terms and conditions at any time without prior notice to the users. Users may be required to agree to the updated terms and conditions before continuing to use the app."
+               ),
               SizedBox(
                 height: width * 0.04,
               ),

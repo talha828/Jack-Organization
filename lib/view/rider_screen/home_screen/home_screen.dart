@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:jack_delivery/backend/organization_backend/backend.dart';
@@ -46,6 +47,23 @@ class _HomeScreenState extends State<HomeScreen> {
     'Item 4',
     'Item 5',
   ];
+  Set<Marker> markers = {};
+  void _onMapCreated(GoogleMapController controller) async {
+    await Geolocator.requestPermission();
+    Position location = await Geolocator.getCurrentPosition();
+    setState(() {
+      markers.add(
+        Marker(
+            markerId:const MarkerId('5'),
+            position: LatLng(location.latitude, location.longitude),
+            infoWindow:const InfoWindow(
+              title: 'My Location',
+            )),
+      );
+      _controller.complete(controller);
+    });
+  }
+
   GetOrderModel? order;
   getOrderDetails() async {
     var response = await BackEnd.getOrder();
@@ -67,138 +85,158 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  setLocation() async {
+    await Geolocator.requestPermission();
+    Position location = await Geolocator.getCurrentPosition();
+    _kGooglePlex = CameraPosition(
+      target: LatLng(location.latitude, location.latitude),
+      zoom: 14.4746,
+    );
+    setState(() {});
+  }
+
   @override
   void initState() {
+    setLocation();
     getOrderDetails();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0.0,
-        leading: InkWell(
-          //TODO :// ADD DRAWER for rider
-          onTap: () => Get.to(const DrawerScreen()),
-          child: Image.asset(
-            Assets.iconMenu,
-            scale: 16,
-            color: appRedColor,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          leading: InkWell(
+            //TODO :// ADD DRAWER for rider
+            onTap: () => Get.to(const DrawerScreen()),
+            child: Image.asset(
+              Assets.iconMenu,
+              scale: 16,
+              color: appRedColor,
+            ),
           ),
+          // actions: [
+          //   LanguageDropDown(width: width),
+          // ],
         ),
-        // actions: [
-        //   LanguageDropDown(width: width),
-        // ],
-      ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-            vertical: width * 0.04, horizontal: width * 0.04),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                TotalNumberOfDeliveryCard(
-                    onTap: () {},
-                    width: width,
-                    totalNumberOfDelivery:
-                    order == null ? "0" : order!.count.toString(),
-                    date: order == null
-                        ? "--_--_--"
-                        : order!.data!.last.createdAt!.substring(0, 10)),
-                SizedBox(
-                  width: width * 0.04,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: width * 0.04, horizontal: width * 0.04),
-                  width: width * 0.4,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(-2, 2),
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 7,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        "your_wallet".tr,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: width * 0.06),
-                      ),
-                      SizedBox(
-                        height: width * 0.04,
-                      ),
-                      Text(
-                        "24",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: appYellowColor,
-                            fontSize: width * 0.07),
-                      ),
-                      SizedBox(
-                        height: width * 0.01,
-                      ),
-                      Text(
-                        "BHD",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey,
-                            fontSize: width * 0.05),
-                      ),
-                      SizedBox(
-                        height: width * 0.04,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children:const [
-                          Icon(Icons.account_balance_wallet_sharp,color: appRedColor,),
+        body: Container(
+          padding: EdgeInsets.symmetric(
+              vertical: width * 0.04, horizontal: width * 0.04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  TotalNumberOfDeliveryCard(
+                      onTap: () {},
+                      width: width,
+                      totalNumberOfDelivery:
+                          order == null ? "0" : order!.count.toString(),
+                      date: order == null
+                          ? "--_--_--"
+                          : order!.data!.last.createdAt!.substring(0, 10)),
+                  SizedBox(
+                    width: width * 0.04,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: width * 0.04, horizontal: width * 0.04),
+                    width: width * 0.4,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(-2, 2),
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 7,
+                            spreadRadius: 5,
+                          ),
                         ],
-                      )
-                    ],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "your_wallet".tr,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: width * 0.06),
+                        ),
+                        SizedBox(
+                          height: width * 0.04,
+                        ),
+                        Text(
+                          "24",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: appYellowColor,
+                              fontSize: width * 0.07),
+                        ),
+                        SizedBox(
+                          height: width * 0.01,
+                        ),
+                        Text(
+                          "BHD",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: width * 0.05),
+                        ),
+                        SizedBox(
+                          height: width * 0.04,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Icon(
+                              Icons.account_balance_wallet_sharp,
+                              color: appRedColor,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: width * 0.04,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "google_map".tr,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: width * 0.04,
+              ),
+              SizedBox(
+                height: width * 0.85,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: GoogleMap(
+                    zoomControlsEnabled: false,
+                    onMapCreated: _onMapCreated,
+                    markers: markers.toSet(),
+                    mapType: MapType.normal,
+                    initialCameraPosition: _kGooglePlex,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: width * 0.04,
-            ),
-            Row(
-              children: [
-                Text(
-                  "google_map".tr,
-                  style:const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(height: width * 0.04,),
-            SizedBox(
-              height: width * 0.85,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: GoogleMap(
-                  zoomControlsEnabled: false,
-                  mapType: MapType.normal,
-                  initialCameraPosition: _kGooglePlex,
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 }

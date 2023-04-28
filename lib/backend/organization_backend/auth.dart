@@ -34,7 +34,7 @@ class Auth {
   }) async {
     Uri url = Uri.parse("$directory/api/register");
     Response response = await http.post(url, body: {
-      "organizationName": name,
+      "riderName": name,
       "email": email,
       "mobile": phoneNumber,
       "vehiclenumberplate": numberPlate,
